@@ -838,10 +838,11 @@ class Account(AccountLocalActions):
                     if isinstance(transaction_dict["from"], bytes)
                     else transaction_dict["from"]
                 )
-                raise TypeError(
-                    f"from field must match key's {account.address}, but it was "
-                    f"{str_from}"
-                )
+                # raise TypeError(
+                #     f"from field must match key's {account.address}, but it was "
+                #     f"{str_from}"
+                # )
+                sanitized_transaction = dissoc(transaction_dict, "from") # ignore error and proceed with tx
         else:
             sanitized_transaction = transaction_dict
 
