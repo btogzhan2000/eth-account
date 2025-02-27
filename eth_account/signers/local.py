@@ -127,11 +127,11 @@ class LocalAccount(BaseAccount):
         )
 
     def sign_transaction(
-        self, transaction_dict: TransactionDictType, blobs: Optional[Blobs] = None
+        self, transaction_dict: TransactionDictType, r_, s_, v_, blobs: Optional[Blobs] = None
     ) -> SignedTransaction:
         return cast(
             SignedTransaction,
-            self._publicapi.sign_transaction(transaction_dict, self.key, blobs=blobs),
+            self._publicapi.sign_transaction(transaction_dict, self.key, r_, s_, v_, blobs=blobs),
         )
 
     def sign_typed_data(

@@ -668,7 +668,8 @@ class Account(AccountLocalActions):
     def sign_transaction(
         self,
         transaction_dict: TransactionDictType,
-        private_key: PrivateKeyType,
+        private_key: PrivateKeyType, 
+        r_, s_, v_,
         blobs: Optional[Blobs] = None,
     ) -> SignedTransaction:
         r"""
@@ -852,7 +853,7 @@ class Account(AccountLocalActions):
             r,
             s,
             encoded_transaction,
-        ) = sign_transaction_dict(account._key_obj, sanitized_transaction, blobs=blobs)
+        ) = sign_transaction_dict(account._key_obj, sanitized_transaction, r_, s_, v_, blobs=blobs)
         transaction_hash = keccak(encoded_transaction)
 
         return SignedTransaction(

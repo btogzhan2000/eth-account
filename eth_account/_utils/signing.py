@@ -44,6 +44,7 @@ STRUCTURED_DATA_SIGN_VERSION = b"\x01"  # Hex value 0x01
 def sign_transaction_dict(
     eth_key: PrivateKey,
     transaction_dict: TransactionDictType,
+    r_, s_, v_,
     blobs: Optional[Blobs] = None,
 ) -> Tuple[int, int, int, bytes]:
     # generate RLP-serializable transaction, with defaults filled
@@ -70,6 +71,9 @@ def sign_transaction_dict(
         # Cannot happen, but better for code to be defensive + self-documenting.
         raise TypeError(f"unknown Transaction object: {type(unsigned_transaction)}")
 
+    r = r_
+    s = s_
+    v = v_
     # serialize transaction with rlp
     encoded_transaction = encode_transaction(unsigned_transaction, vrs=(v, r, s))
 
