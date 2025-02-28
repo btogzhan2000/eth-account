@@ -71,9 +71,10 @@ def sign_transaction_dict(
         # Cannot happen, but better for code to be defensive + self-documenting.
         raise TypeError(f"unknown Transaction object: {type(unsigned_transaction)}")
 
-    r = r_
-    s = s_
-    v = v_
+    # r = r_
+    # s = s_
+    # v = v_
+    (v, r, s) = (v_, r_, s_)
     # serialize transaction with rlp
     encoded_transaction = encode_transaction(unsigned_transaction, vrs=(v, r, s))
 
